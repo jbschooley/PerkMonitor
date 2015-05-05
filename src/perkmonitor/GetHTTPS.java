@@ -1,4 +1,4 @@
-package me.silvertriclops.perkmonitor;
+package perkmonitor;
 
 
 import java.net.URL;

@@ -1,4 +1,4 @@
-package me.silvertriclops.perkmonitor;
+package perkmonitor;
 
 
 import java.io.BufferedReader;
@@ -15,7 +15,7 @@ public class GetPoints {
 	public static void main(String[] args) throws Exception {
 		String uid = "1710404";
 		String token = "99cfad4eba00c309409e38e5002bee7d6df75698";
-		 
+		
 		System.out.println(getPoints(uid, token));
 	}
 	
