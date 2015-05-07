@@ -1,4 +1,4 @@
-package perkmonitor;
+package me.silvertriclops.perkmonitor;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,8 +7,8 @@ import javax.swing.*;
 import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.border.EmptyBorder;
+import java.awt.Toolkit;
 
 public class App extends JFrame {
 	private static final long serialVersionUID = 1401798330812386993L;
@@ -20,26 +20,25 @@ public class App extends JFrame {
 	private final JMenu mnSettings = new JMenu("Settings");
 	private final JCheckBoxMenuItem chckbxmntmAutoRefresh = new JCheckBoxMenuItem("Auto Refresh");
 	private final JMenu mnInterval = new JMenu("Refresh Interval");
-	private final JMenuItem mntmMin = new JMenuItem("1 min");
-	private final JMenuItem mntmMin_1 = new JMenuItem("5 min");
-	private final JMenuItem mntmMin_2 = new JMenuItem("10 min");
-	private final JMenuItem mntmMin_3 = new JMenuItem("15 min");
-	private final JMenuItem mntmMin_4 = new JMenuItem("30 min");
+	private final JMenuItem mntmRe1 = new JMenuItem("1 min");
+	private final JMenuItem mntmRe5 = new JMenuItem("5 min");
+	private final JMenuItem mntmRe10 = new JMenuItem("10 min");
+	private final JMenuItem mntmRe30 = new JMenuItem("30 min");
 	private final JSeparator separator = new JSeparator();
 	private final JMenu mnLogInterval = new JMenu("Log Interval");
-	private final JMenuItem mntmMin_5 = new JMenuItem("1 min");
-	private final JMenuItem mntmMin_6 = new JMenuItem("5 min");
-	private final JMenuItem mntmMin_7 = new JMenuItem("10 min");
-	private final JMenuItem mntmMin_8 = new JMenuItem("15 min");
-	private final JMenuItem mntmMin_9 = new JMenuItem("30 min");
-	private final JMenuItem mntmMin_10 = new JMenuItem("60 min");
-	private final JMenuItem mntmMin_11 = new JMenuItem("120 min");
+	private final JMenuItem mntmLog1 = new JMenuItem("1 min");
+	private final JMenuItem mntmLog5 = new JMenuItem("5 min");
+	private final JMenuItem mntmLog10 = new JMenuItem("10 min");
+	private final JMenuItem mntmLog30 = new JMenuItem("30 min");
+	private final JMenuItem mntmLog60 = new JMenuItem("60 min");
+	private final JMenuItem mntmLog120 = new JMenuItem("120 min");
 	private final JSeparator separator_1 = new JSeparator();
-	private final JMenuItem mntmAuthentication = new JMenuItem("Authentication...");
+	private final JMenuItem mntmAuth = new JMenuItem("Authentication...");
 	private final JCheckBoxMenuItem chckbxmntmLog = new JCheckBoxMenuItem("Log");
 	
 	public App() {
-		pmain.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(App.class.getResource("/img/perk.png")));
+		pmain.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		setResizable(false);
 		getContentPane().add(pmain, BorderLayout.CENTER);
@@ -62,17 +61,16 @@ public class App extends JFrame {
 		// Points display
 		pmain.add(lbPoints);
 		
-		//setSize(new Dimension(187, 122));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Points");
-		//setIconImage(new ImageIcon(getClass().getResource("/8ball/32.png")).getImage());
-		setLocationRelativeTo(null);
-		
 		setJMenuBar(menuBar);
 		
 		menuBar.add(mnSettings);
 		
-		mnSettings.add(mntmAuthentication);
+		mnSettings.add(mntmAuth);
+		mntmAuth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new AuthDialog();
+			}
+		});
 		
 		mnSettings.add(separator_1);
 		
@@ -80,15 +78,13 @@ public class App extends JFrame {
 		
 		mnSettings.add(mnInterval);
 		
-		mnInterval.add(mntmMin);
+		mnInterval.add(mntmRe1);
 		
-		mnInterval.add(mntmMin_1);
+		mnInterval.add(mntmRe5);
 		
-		mnInterval.add(mntmMin_2);
+		mnInterval.add(mntmRe10);
 		
-		mnInterval.add(mntmMin_3);
-		
-		mnInterval.add(mntmMin_4);
+		mnInterval.add(mntmRe30);
 		
 		mnSettings.add(separator);
 		
@@ -96,20 +92,23 @@ public class App extends JFrame {
 		
 		mnSettings.add(mnLogInterval);
 		
-		mnLogInterval.add(mntmMin_5);
+		mnLogInterval.add(mntmLog1);
 		
-		mnLogInterval.add(mntmMin_6);
+		mnLogInterval.add(mntmLog5);
 		
-		mnLogInterval.add(mntmMin_7);
+		mnLogInterval.add(mntmLog10);
 		
-		mnLogInterval.add(mntmMin_8);
+		mnLogInterval.add(mntmLog30);
 		
-		mnLogInterval.add(mntmMin_9);
+		mnLogInterval.add(mntmLog60);
 		
-		mnLogInterval.add(mntmMin_10);
+		mnLogInterval.add(mntmLog120);
 		
-		mnLogInterval.add(mntmMin_11);
 		pack();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Points");
+		//setIconImage(new ImageIcon(getClass().getResource("/8ball/32.png")).getImage());
+		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 	
@@ -127,22 +126,5 @@ public class App extends JFrame {
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		new App();
-	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
 	}
 }

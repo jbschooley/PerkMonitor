@@ -1,0 +1,18 @@
+{
+	"loggedin": true,
+	"auth": {
+		"uid": "",
+		"token": "",
+	},
+	"stats": {
+		"points": "0"
+		"lifetimepoints": "0",
+		"tokens": "0"
+	},
+	"settings": {
+		"autoRefresh": false,
+		"autoRefreshInterval": 1,
+		"log": false,
+		"logInterval": 10
+	}
+}

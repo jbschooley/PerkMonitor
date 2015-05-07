@@ -1,4 +1,4 @@
-package perkmonitor;
+package me.silvertriclops.perkmonitor;
 
 
 import java.io.BufferedReader;
