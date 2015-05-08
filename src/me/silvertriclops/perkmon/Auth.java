@@ -1,4 +1,4 @@
-package me.silvertriclops.perkmonitor;
+package me.silvertriclops.perkmon;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -13,13 +13,13 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AuthDialog extends JDialog {
+public class Auth extends JDialog {
 	private static final long serialVersionUID = 1405569341259083187L;
 	private JTextField tfUID;
 	private JTextField tfToken;
-	public AuthDialog() {
+	public Auth() {
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(AuthDialog.class.getResource("/img/perk.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Auth.class.getResource("/img/perk.png")));
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel pmain = new JPanel();
@@ -93,5 +93,10 @@ public class AuthDialog extends JDialog {
 			
 		}
 	};
+	
+	public static Boolean authtest() {
+		
+		return true;
+	}
 
 }

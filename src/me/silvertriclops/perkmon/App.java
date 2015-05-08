@@ -1,4 +1,4 @@
-package me.silvertriclops.perkmonitor;
+package me.silvertriclops.perkmon;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,7 +68,7 @@ public class App extends JFrame {
 		mnSettings.add(mntmAuth);
 		mntmAuth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new AuthDialog();
+				new Auth();
 			}
 		});
 		
@@ -116,7 +116,7 @@ public class App extends JFrame {
 		String uid = "1710404";
 		String token = "99cfad4eba00c309409e38e5002bee7d6df75698";
 		try {
-			lbPoints.setText(GetPoints.getPoints(uid, token));
+			lbPoints.setText(GetPoints.getPoints(uid, token)[2]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

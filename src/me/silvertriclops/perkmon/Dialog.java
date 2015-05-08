@@ -1,4 +1,4 @@
-package me.silvertriclops.perkmonitor;
+package me.silvertriclops.perkmon;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
