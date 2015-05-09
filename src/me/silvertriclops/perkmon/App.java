@@ -116,7 +116,7 @@ public class App extends JFrame {
 		String uid = "1710404";
 		String token = "99cfad4eba00c309409e38e5002bee7d6df75698";
 		try {
-			lbPoints.setText(GetPoints.getPoints(uid, token)[2]);
+			lbPoints.setText(GetStats.getStats(uid, token)[1]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

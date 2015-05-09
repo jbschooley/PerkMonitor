@@ -1,6 +1,7 @@
 package me.silvertriclops.perkmon;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,6 +47,7 @@ public class Dialog extends JDialog {
 		getContentPane().add(panel);
 		
 		pack();
+		this.setMaximumSize(new Dimension(400, 300));
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}

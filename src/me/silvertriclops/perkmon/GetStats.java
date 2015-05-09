@@ -12,17 +12,17 @@ import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class GetPoints {
+public class GetStats {
 
 	public static void main(String[] args) throws Exception {
 		String uid = "1710404";
 		String token = "99cfad4eba00c309409e38e5002bee7d6df75698";
 		
-		System.out.println(getPoints(uid, token));
+		System.out.println(getStats(uid, token));
 	}
 	
-	public static String[] getPoints(String u, String t) {
-		String[] points = {"0", "0"};
+	public static String[] getStats(String u, String t) {
+		String[] points = new String[4];
 		try {
 			String httpsURL = "https://api.perk.com/api/usercurrencyinformation?user_id="
 					+ u
@@ -45,14 +45,18 @@ public class GetPoints {
 			JSONObject stuff = new JSONObject(output);
 			
 			if (stuff.has("error")) {
-				points[1] = "2";
+				points[0] = "1";
 				return points;
 			}
 			
-			points[1] = "1";
-			points[2] = stuff.getJSONObject("userperks").get("availableperks").toString();
+			JSONObject userperks = stuff.getJSONObject("userperks");
+			
+			points[0] = "0";
+			points[1] = userperks.getString("availableperks");
+			points[2] = userperks.getString("lifetimeperks");
+			points[3] = userperks.getString("availabletokens");
 		} catch (IOException | JSONException e) {
-			new Dialog("Your Internet doesn't seem to be working!");
+			points[0] = "2";
 			return points;
 		}
 		return points;

@@ -28,8 +28,12 @@ public class Main {
 				System.exit(0);
 			};
 		}
-		//String configstuff = FileUtils.readFileToString(configfile);
 		config = new JSONObject(FileUtils.readFileToString(configfile));
+		String[] stats = GetStats.getStats(config.getJSONObject("auth").getString("uid"), config.getJSONObject("auth").getString("token"));
+		switch (stats[1]) {
+		case "0":
+			
+		}
 		new App();
 		
 	}
