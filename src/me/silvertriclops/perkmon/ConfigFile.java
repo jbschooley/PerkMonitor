@@ -1,8 +1,11 @@
 package me.silvertriclops.perkmon;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import org.json.JSONObject;
 
 public class ConfigFile {
 	static File configfile = new File("perkmon.config/config.json");
@@ -18,5 +21,15 @@ public class ConfigFile {
 			e.printStackTrace();
 		}
 		return true;
+	}
+	
+	public static void write(JSONObject updated) {
+		try {
+			FileWriter file = new FileWriter("perkmon.config/config.json");
+			file.write(updated.toString());
+			file.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

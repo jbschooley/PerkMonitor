@@ -12,11 +12,13 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class Dialog extends JDialog {
 	private static final long serialVersionUID = 2552792018106020215L;
 
-	public Dialog(String error) {
+	public Dialog(String error, String buttonText, ActionListener buttonAction) {
 		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(App.class.getResource("/img/perk.png")));
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -44,6 +46,16 @@ public class Dialog extends JDialog {
 			}
 		});
 		panel_2.add(btnClose);
+		
+		if (!(buttonText == null)) {
+			Component horizontalStrut = Box.createHorizontalStrut(5);
+			panel_2.add(horizontalStrut);
+			JButton btnAction = new JButton(buttonText);
+			btnAction.addActionListener(buttonAction);
+			panel_2.add(btnAction);
+		}
+		
+		
 		getContentPane().add(panel);
 		
 		pack();
@@ -53,7 +65,7 @@ public class Dialog extends JDialog {
 	}
 	
 	public static void main(String[] args) {
-		new Dialog("test");
+		new Dialog("test", null, null);
 	}
 
 }

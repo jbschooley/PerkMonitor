@@ -9,14 +9,21 @@ import java.awt.Insets;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class Auth extends JDialog {
 	private static final long serialVersionUID = 1405569341259083187L;
 	private JTextField tfUID;
 	private JTextField tfToken;
+	
 	public Auth() {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Auth.class.getResource("/img/perk.png")));
@@ -90,13 +97,21 @@ public class Auth extends JDialog {
 	
 	ActionListener ok = new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			
+			updateconfig(tfUID.getText(), tfToken.getText());
+			dispose();
 		}
 	};
 	
-	public static Boolean authtest() {
-		
-		return true;
+	public void updateconfig(String uid, String token) {
+		try {
+			File configfile = new File("perkmon.config/config.json");
+			JSONObject config = new JSONObject(FileUtils.readFileToString(configfile));
+			config.getJSONObject("auth").put("uid", uid);
+			config.getJSONObject("auth").put("token", token);
+			ConfigFile.write(config);
+		} catch (JSONException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

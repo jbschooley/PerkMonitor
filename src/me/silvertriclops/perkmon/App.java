@@ -109,6 +109,7 @@ public class App extends JFrame {
 		setTitle("Points");
 		//setIconImage(new ImageIcon(getClass().getResource("/8ball/32.png")).getImage());
 		setLocationRelativeTo(null);
+		update();
 		setVisible(true);
 	}
 	
