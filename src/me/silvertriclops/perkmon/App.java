@@ -104,12 +104,12 @@ public class App extends JFrame {
 		
 		mnLogInterval.add(mntmLog120);
 		
+		update();
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Points");
 		//setIconImage(new ImageIcon(getClass().getResource("/8ball/32.png")).getImage());
 		setLocationRelativeTo(null);
-		update();
 		setVisible(true);
 	}
 	

@@ -15,7 +15,7 @@ public class ConfigFile {
 			configfile.createNewFile();
 			configfile.setWritable(true);
 			PrintWriter out = new PrintWriter(configfile);
-			out.println("{\n\t\"loggedin\": true,\n\t\"auth\": {\n\t\t\"uid\": \"\",\n\t\t\"token\": \"\"\n\t},\n\t\"stats\": {\n\t\t\"points\": \"0\",\n\t\t\"lifetimepoints\": \"0\",\n\t\t\"tokens\": \"0\"\n\t},\n\t\"settings\": {\n\t\t\"autoRefresh\": false,\n\t\t\"autoRefreshInterval\": 1,\n\t\t\"log\": false,\n\t\t\"logInterval\": 10\n\t}\n}");
+			out.println("{\"loggedin\":true,\"auth\":{\"uid\":\"0\",\"token\":\"0\"},\"stats\":{\"points\":\"0\",\"lifetimepoints\":\"0\",\"tokens\":\"0\"},\"settings\":{\"autoRefresh\":false,\"autoRefreshInterval\":1,\"log\":false,\"logInterval\":10}}");
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();

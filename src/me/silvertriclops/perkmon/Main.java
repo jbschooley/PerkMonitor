@@ -28,16 +28,16 @@ public class Main {
 				System.exit(0);
 			};
 		}
-		config = new JSONObject(FileUtils.readFileToString(configfile));
 		
-		Boolean x = true;
-		while (x) {
+		int x = 0;
+		while (x < 5) {
+			config = new JSONObject(FileUtils.readFileToString(configfile));
 			String[] stats = GetStats.getStats(config.getJSONObject("auth")
 					.getString("uid"),
 					config.getJSONObject("auth").getString("token"));
 			switch (stats[0]) {
 			case "0":
-				x = false;
+				x = 5;
 				new App();
 				break;
 			case "1":
@@ -46,9 +46,11 @@ public class Main {
 						new Auth();
 					}
 				});
+				x++;
 				break;
 			case "2":
 				new Dialog("Please check your internet connection.", null, null);
+				x++;
 				break;
 			}
 		}

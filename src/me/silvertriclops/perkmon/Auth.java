@@ -2,6 +2,7 @@ package me.silvertriclops.perkmon;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -18,6 +19,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class Auth extends JDialog {
 	private static final long serialVersionUID = 1405569341259083187L;
@@ -26,6 +31,7 @@ public class Auth extends JDialog {
 	
 	public Auth() {
 		setResizable(false);
+		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Auth.class.getResource("/img/perk.png")));
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -68,7 +74,7 @@ public class Auth extends JDialog {
 		gbc_lbToken.gridy = 1;
 		panel.add(lbToken, gbc_lbToken);
 		
-		tfToken = new JTextField();
+		tfToken = new JPasswordField();
 		GridBagConstraints gbc_tfToken = new GridBagConstraints();
 		gbc_tfToken.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfToken.gridx = 1;
@@ -83,14 +89,25 @@ public class Auth extends JDialog {
 		pmain.add(panel_1);
 		
 		JButton btnOK = new JButton("OK");
+		btnOK.addActionListener(ok);
 		panel_1.add(btnOK);
 		
 		JButton btnHelp = new JButton("Help");
+		btnHelp.addActionListener(help);
 		panel_1.add(btnHelp);
 		
 		pack();
 		setTitle("Authentication");
 		//setIconImage(new ImageIcon(getClass().getResource("/8ball/32.png")).getImage());
+		
+		try {
+			File configfile = new File("perkmon.config/config.json");
+			JSONObject config = new JSONObject(FileUtils.readFileToString(configfile));
+			tfUID.setText(config.getJSONObject("auth").getString("uid"));
+		} catch (JSONException | IOException e) {
+			e.printStackTrace();
+		}
+		
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
@@ -102,6 +119,16 @@ public class Auth extends JDialog {
 		}
 	};
 	
+	ActionListener help = new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			try {
+				openWebpage(new URL("https://www.reddit.com/r/perktv/comments/2a26iu/perktv_tracker_v12/cir6onk"));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		}
+	};
+	
 	public void updateconfig(String uid, String token) {
 		try {
 			File configfile = new File("perkmon.config/config.json");
@@ -110,6 +137,25 @@ public class Auth extends JDialog {
 			config.getJSONObject("auth").put("token", token);
 			ConfigFile.write(config);
 		} catch (JSONException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void openWebpage(URI uri) {
+		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+			try {
+				desktop.browse(uri);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void openWebpage(URL url) {
+		try {
+			openWebpage(url.toURI());
+		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}

@@ -12,10 +12,16 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Component;
+
 import javax.swing.Box;
 
-public class Dialog extends JDialog {
+interface Callback {
+	void close(Object result);
+}
+
+public class Dialog extends JDialog implements Callback {
 	private static final long serialVersionUID = 2552792018106020215L;
 
 	public Dialog(String error, String buttonText, ActionListener buttonAction) {
@@ -66,6 +72,10 @@ public class Dialog extends JDialog {
 	
 	public static void main(String[] args) {
 		new Dialog("test", null, null);
+	}
+	
+	public void close(Object result) {
+		dispose();
 	}
 
 }

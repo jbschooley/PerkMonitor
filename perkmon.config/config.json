@@ -1,18 +1,1 @@
-{
-	"loggedin": true,
-	"auth": {
-		"uid": "",
-		"token": ""
-	},
-	"stats": {
-		"points": "0",
-		"lifetimepoints": "0",
-		"tokens": "0"
-	},
-	"settings": {
-		"autoRefresh": false,
-		"autoRefreshInterval": 1,
-		"log": false,
-		"logInterval": 10
-	}
-}
+{"settings":{"autoRefresh":false,"log":false,"autoRefreshInterval":1,"logInterval":10},"auth":{"uid":"1710404","token":""},"stats":{"lifetimepoints":"0","tokens":"0","points":"0"},"loggedin":true}
